@@ -68,9 +68,11 @@ public class GameManager : MonoBehaviour
         if(DarkRiftAPI.isConnected)
             DarkRiftAPI.onDataDetailed += ReceiveData;
         else
-			messageText.text = "Failed to connect to the server!";
+        {
+            messageText.text = "Failed to connect to the server!";
 
-        StopCoroutine(JoinServer(messageText));
+            StopCoroutine(JoinServer(messageText));
+        }
 
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
         async = SceneManager.LoadSceneAsync(trainerData.lastZone);

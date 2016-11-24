@@ -134,12 +134,16 @@ public class MainMenu : MonoBehaviour
 		
 		string[] CharacterNames = w.text.Split(',');
 
-		for(int c = 0; c < CharacterNames.Length; c++)
-		{
-			CreateButtons[c].SetActive(false);
-			CharacterButtons[c].SetActive(true);
-			CharacterButtonTexts[c].text = CharacterNames[c];
-		}
+        if(CharacterNames.Length > 0)
+        {
+		    for(int c = 0; c < CharacterNames.Length; c++)
+		    {
+			    CreateButtons[c].SetActive(false);
+			    CharacterButtons[c].SetActive(true);
+			    CharacterButtonTexts[c].text = CharacterNames[c];
+		    }
+        }
+
 	}
     private IEnumerator CreateCharacter(WWW w, string username)
 	{
@@ -206,8 +210,7 @@ public class MainMenu : MonoBehaviour
                 ModifiedResults[i] = new string[37];
                 ModifiedResults[i] = results[i].Split(',');
             }
-
-            for(int x = 0; x < ModifiedResults.Length - 1; x++)
+            for(int x = 0; x < ModifiedResults.Length; x++)
             {
                 PokemonData data = new PokemonData();
                 data.pokemonName = ModifiedResults[x][0];
@@ -247,8 +250,8 @@ public class MainMenu : MonoBehaviour
                 int.TryParse(ModifiedResults[x][34], out data.curEXP);
                 int fromTrade = 0;
                 data.fromTrade = int.TryParse(ModifiedResults[x][35], out fromTrade) ? false : true;
-                int slot;
-                data.id = int.TryParse(ModifiedResults[x][36], out slot) ? 0 : slot;
+                int id;
+                data.id = int.TryParse(ModifiedResults[x][36], out id) ? 0 : id;
 
                 gameManager.trainerData.Pokemon.Add(data);
             }
